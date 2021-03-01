@@ -1,0 +1,145 @@
+define({ "api": [
+  {
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "optional": false,
+            "field": "varname1",
+            "description": "<p>No type.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "varname2",
+            "description": "<p>With type.</p>"
+          }
+        ]
+      }
+    },
+    "type": "",
+    "url": "",
+    "version": "0.0.0",
+    "filename": "./doc/main.js",
+    "group": "/Users/munoz/Projects/namatad/deployment/doc/main.js",
+    "groupTitle": "/Users/munoz/Projects/namatad/deployment/doc/main.js",
+    "name": ""
+  },
+  {
+    "type": "post",
+    "url": "/items",
+    "title": "Create a new todo-list item",
+    "name": "CreateItem",
+    "group": "User",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "title",
+            "description": "<p>The title of the todo-list item</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "text",
+            "description": "<p>The text of the todo-list item</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  'success': \"Successfully added new list item.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "NoTitle",
+            "description": "<p>The title parameter was not provided.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "NoText",
+            "description": "<p>The text parameter was not provided.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"To use this endpoint, you must provide a title, and text parameters\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./controller/controller.js",
+    "groupTitle": "User"
+  },
+  {
+    "type": "get",
+    "url": "/items",
+    "title": "Request User Todo-List items",
+    "name": "GetItems",
+    "group": "User",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "JSON[]",
+            "optional": false,
+            "field": "items",
+            "description": "<p>The list of todo-list items, each item containing a date-created, title, and text</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Date",
+            "optional": false,
+            "field": "date-created",
+            "description": "<p>The date the todo-list item was created</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "title",
+            "description": "<p>The title of the todo-list item</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "text",
+            "description": "<p>The description text of the todo-list item</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"items\": [\n              {\n                 'date-created': \"01/05/21\",\n                 'title': 'Do laundry'\n                 'text': 'Separate dirty and clean laundry and send dirty laundry to laundromat.'\n              }\n           ]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./controller/controller.js",
+    "groupTitle": "User"
+  }
+] });
