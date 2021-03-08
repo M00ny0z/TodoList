@@ -1,18 +1,45 @@
-import React, { Component } from 'react';
+/*
+   Edited by: Michael Babko
+   Date March 2021
 
-/**
- * App class runs entire application
- */
-class App extends Component {
-   /**
-   * Represents a book.
-   * @constructor
-   */
-   constructor() {
-      super();
-   }
+   Author: Emmanuel Munoz
+   Date: October 2020
 
-   render() {
+   Renders a fake-data Todolist page for now.
+*/
+   import React, { useState } from 'react';
+
+   import ManageTodolist from './components/ManageTodolist';
+   
+   const App = () => {
+      const [alertStatus, setAlertStatus] = useState(false);
+      const [currentAlert, setAlert] = useState('');
+      const [alertType, setAlertType] = useState('');
+
+
+      const createAlert = (message, type) => {
+         setAlertType(type);
+         setAlert(message);
+         setAlertStatus(true);
+
+         setTimeout(() => {
+            setAlert('');
+            setAlertStatus('');
+            setAlertStatus(false);
+         }, 2000);
+      }
+
+      const renderAlert = () => {
+         if (alertStatus) {
+            return (
+               <Alert variant={alertType} className="d-flex align-items-center">
+                  <AlertIcon />
+                  { currentAlert }
+               </Alert>
+            );
+         }
+      };
+   
       return (
       <div className="App">
          <button className="btn btn-primary">Add Item</button>
@@ -54,11 +81,13 @@ class App extends Component {
                      </p>
                   </div>
                </div>
+               
+               <ManageTodolist/>
             </li>
          </ul>
       </div>
+
     );
   }
-}
-
+  
 export default App;
