@@ -7,7 +7,7 @@
 */
 
 import { useState, useEffect } from 'react';
-import api from '../api/api.js'; // add .js to all file imports
+import api from '../api/api';
 
 const useItems = () => {
    const [itemList, setItems] = useState([]);
