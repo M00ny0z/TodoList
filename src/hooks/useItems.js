@@ -2,17 +2,20 @@
    Author: Michael Babko
    Date: March 2021
 
-   Makes requests to the Todolist for the api information
+   Makes requests to the TodolistAPI for information regarding Todolist items.
+   Returns the array of Todolist items and a function to call to update the list.
 */
 
 import { useState, useEffect } from 'react';
-import api from '../api/api';
+import api from '../api/api.js'; // add .js to all file imports
 
 const useItems = () => {
-   const [itemList, setItems ] = useState([]);
+   const [itemList, setItems] = useState([]);
 
+   /**
+    * Initial request for the Todolist information and stores it for use
+    */
    useEffect(() => {
-
       const requestItems = async () => {
          getItems();
       };
@@ -20,11 +23,13 @@ const useItems = () => {
       requestItems();
    }, []);
 
-
+   /**
+    * Makes a GET request to the API for the current Todolist information
+    */
    const getItems = async () => {
       const response = await api('/items');
-      const items = response.items;
-      setItems(items); // getting an undefined error in ManageTodolist
+      const items = response.data.items;
+      setItems(items);
    };
 
    return [itemList, getItems];
