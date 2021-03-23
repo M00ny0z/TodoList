@@ -1,5 +1,5 @@
 /*
-   Author: Michael Babko
+   Author: Maria Babko
    Date: March 2021
 
    Creates an API object which will send requests to the Todolist API

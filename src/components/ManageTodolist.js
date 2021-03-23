@@ -1,56 +1,58 @@
 /*
-  Author: Michael Babko
+  Author: Maria Babko
   Date: March 2021
 
   Renders all of the live todo-list items from the Todo-list API.
+  Allows for creating new todo-list items.
+
+  PROPS:
+      createAlert(message, type) - Function to call should to display alerts
 */
 
-import React from 'react';
+import React, { useState } from 'react';
 import useItems from '../hooks/useItems';
-import TodolistModal from './TodolistModal';
-import CreateTodolistModal from './EditTodolistModal';
 
-//import api from '../api/api';
-import Table from 'react-bootstrap/Table';
-//import Ex from './Ex';
+import CreateTodolistModal from './CreateTodolistModal';
+
 
 const ManageTodolist = (props) => {
-    const [items] = useItems();  // this.items = items;
+   const [items] = useItems();  // this.items = items;
 
-    // method is executing, but not our loop
-    const renderItemsTable = () => {
-        return items.map((item) => {
-            return ( 
-               <tr key={ item.date-created }> 
-                  <td>{ item.date-created }</td>
-                  <td>{ item.title }</td>
-                  <td>{ item.text }</td>
-               </tr>
-            );
-        });
-    };
+   /**
+    * Displays all current todo-list items.
+    * @return {JSX[]} - The array of todo-list items to display in each separate box.
+    */
+   const renderItemsTodolist = () => {
+      return items.map((item, index) => {
+         const date = new Date(item['date-created']);
+         const month = date.toLocaleString('default', {month: 'long'});
+         const day = date.getDate();
+         const year = date.getFullYear();
+         return ( 
+               <li key={ index }>
+                  <div className="card" style={{width: '18rem'}}>
+                     <div className="card-body">
+                        <h5 className="card-title">{item.title}</h5>
+   
+                        <h6 className="card-subtitle mb-2 text-muted">{month} {day} , {year}</h6>
+                        <p className="card-text">{item.text}</p>
+                     </div>
+                  </div>
+               </li>
 
+         );
+      });
+   };
 
-//<MemberModal createAlert={props.createAlert} />
-return(
-    <div className="d-flex flex-column mt-2">
-    <Table>
-       <thead>
-         <tr>
-           <th>Name</th>
-           <th>Title</th>
-           <th>Text</th>
-         </tr>
-       </thead>
-       <tbody>
-         { renderItemsTable() }
-         <td>TEST2</td>
-       </tbody>
-    </Table>
- </div>
-);
+   return(
+      <div className="d-flex flex-column mt-2">
+         <div className="d-flex justify-content-center align-items-center mb-2">
+            <CreateTodolistModal createAlert={props.createAlert} />
+         </div>
+            <ul>{ renderItemsTodolist() }</ul>
+      </div>   
+   );
 
 };
 
 export default ManageTodolist;
-

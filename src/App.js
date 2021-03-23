@@ -1,19 +1,28 @@
 /*
-   Edited by: Michael Babko
+   Edited by: Maria Babko
    Date March 2021
 
    Renders a Todolist page.
 */
 import React, { useState } from 'react';
 
+import Alert from 'react-bootstrap/Alert';
 import ManageTodolist from './components/ManageTodolist';
 
+/**
+  * Sends POST request to TodolistAPI to add todo-list item.
+  */
 const App = () => {
    const [alertStatus, setAlertStatus] = useState(false);
    const [currentAlert, setAlert] = useState('');
    const [alertType, setAlertType] = useState('');
 
 
+   /**
+    * Creates a new alert and displays it to the user
+    * After 2 seconds, clears the alarm.
+    * @param {String} message - The alert message to display
+    */
    const createAlert = (message, type) => {
       setAlertType(type);
       setAlert(message);
@@ -26,6 +35,10 @@ const App = () => {
       }, 2000);
    }
 
+   /**
+    * If alarm status is set to true, displays the alarm
+    * @return {JSX} - The JSX of the alarm if the status of the alarm is true
+    */
    const renderAlert = () => {
       if (alertStatus) {
          return (
@@ -38,56 +51,13 @@ const App = () => {
    };
 
    return (
-   <div className="App">
-      <button className="btn btn-primary">Add Item</button>
-      <ul>
-         <li>
-            <div class="card" style={{width: '18rem'}}>
-               <div class="card-body">
-                  <h5 class="card-title">Go Shopping</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">January 5, 2021</h6>
-                  <p class="card-text">
-                     Some quick example text to build on the card title and make up the bulk of
-                     the card's content.
-                  </p>
-               </div>
-            </div>
-         </li>
-
-         <li>
-            <div class="card" style={{width: '18rem'}}>
-               <div class="card-body">
-                  <h5 class="card-title">Go Shopping</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">January 5, 2021</h6>
-                  <p class="card-text">
-                     Some quick example text to build on the card title and make up the bulk of 
-                     the card's content.
-                  </p>
-               </div>
-            </div>
-         </li>
-
-         <li>
-            <div class="card" style={{width: '18rem'}}>
-               <div class="card-body">
-                  <h5 class="card-title">Go Shopping</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">January 5, 2021</h6>
-                  <p class="card-text">
-                     Some quick example text to build on the card title and make up the bulk of 
-                     the card's content.
-                  </p>
-               </div>
-            </div>
-            
-            <ManageTodolist/>
-         </li>
-      </ul>
-   </div>
-
- );
+      <div>
+         { renderAlert() }
+         <ManageTodolist createAlert={createAlert} />
+      </div>
+      
+   );
 }
 
 export default App;
 
-// { renderAlert() }
-// <ManageTodolist createAlert={createAlert} />
