@@ -10,7 +10,7 @@
    import ManageTodolist from './components/ManageTodolist';
    
    /**
-    * Sends POST request to Todolist API to add a Todolist item.
+    * Renders the live Todolist and the alerts associated with adding list items.
     */
    const App = () => {
       const [alertStatus, setAlertStatus] = useState(false);
@@ -32,28 +32,28 @@
             setAlertStatus('');
             setAlertStatus(false);
          }, 3000);
-      }
+      };
 
-   /**
-    * If the alarm status is set to true, renders the alarm
-    * @returns {JSX} - The JSX of the alarm when the alarm status is true
-    */
-   const renderAlert = () => {
-      if (alertStatus) {
+      /**
+       * If the alarm status is set to true, renders the alarm
+       * @returns {JSX} - The JSX of the alarm when the alarm status is true
+       */
+      const renderAlert = () => {
+         if (alertStatus) {
+            return (
+               <Alert variant={alertType} className="d-flex align-items-center">
+                  { currentAlert }
+               </Alert>
+            );
+         }
+      };
+
          return (
-            <Alert variant={alertType} className="d-flex align-items-center">
-               { currentAlert }
-            </Alert>
+            <div className="App">
+               { renderAlert() }
+               <ManageTodolist createAlert={createAlert}/>
+            </div>
          );
-      }
-   };
-
-      return (
-         <div className="App">
-            { renderAlert() }
-            <ManageTodolist createAlert={createAlert}/>
-         </div>
-      );
-   }
+      };
    
 export default App;

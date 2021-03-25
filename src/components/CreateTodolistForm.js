@@ -2,7 +2,8 @@
    Author: Michael Babko
    Date: March 2021
 
-   Allows for the creation of Todolist items.
+   Renders a form that allow the user to create todolist items.
+   Makes a POST request if the form is successfully filled out.
 */
 import React from 'react';
 import { useFormik } from 'formik';
@@ -32,7 +33,7 @@ const validate = (values) => {
    }
 
    return errors;
-}
+};
 
 const CreateTodolistForm = (props) => {
 
@@ -88,6 +89,6 @@ const CreateTodolistForm = (props) => {
          </div>
       </Form>
    );
-}
+};
 
 export default CreateTodolistForm;

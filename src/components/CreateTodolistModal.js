@@ -28,13 +28,16 @@ const CreateTodolistModal = (props) => {
             backdrop="static"
             keyboard={false}
          >
-            <Modal.Header closeButton>
+            <Modal.Header>
                <Modal.Title>Todo Task</Modal.Title>
+               <Button className="btn btn-secondary" onClick={handleClose}>
+                  Close
+               </Button>
             </Modal.Header>
 
             <Modal.Body>
                <CreateTodolistForm createAlert={props.createAlert}
-                handleClose={handleClose} />
+                  handleClose={handleClose} />
             </Modal.Body>
          </Modal>
       </div>
